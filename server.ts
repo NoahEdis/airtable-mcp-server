@@ -238,6 +238,7 @@ server.registerTool(
 // ----------------- HTTP wiring + auth gate -----------------
 const app = express();
 app.use(express.json());
+app.use((req, res, next) => { res.setHeader("Access-Control-Allow-Origin", "*"); next(); });
 
 // Protected Resource Metadata (PRM)
 app.get("/.well-known/oauth-protected-resource", (_req, res) => {
