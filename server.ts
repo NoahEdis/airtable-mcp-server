@@ -133,7 +133,7 @@ app.use(express.json());
 // Protected Resource Metadata (PRM)
 app.get("/.well-known/oauth-protected-resource", (_req, res) => {
   res.json({
-    resource: `${PUBLIC_BASE_URL}/mcp`,
+    resource: `${PUBLIC_BASE_URL}`,
     authorization_servers: [`${AUTH0_ISSUER}`.replace(/\/$/, "")],
     bearer_methods_supported: ["header"],
     scopes_supported: ["airtable.read", "airtable.write"],
@@ -160,9 +160,11 @@ app.post("/mcp", async (req, res) => {
   } catch (e: any) {
     res.set(
       "WWW-Authenticate",
-      `Bearer error="invalid_token", resource="${PUBLIC_BASE_URL}/mcp", as_uri="${PUBLIC_BASE_URL}/.well-known/oauth-protected-resource"`
+      `Bearer error="invalid_token", resource="${PUBLIC_BASE_URL}", as_uri="${PUBLIC_BASE_URL}/.well-known/oauth-protected-resource"`
     );
-    res.status(e?.message?.startsWith("forbidden:") ? 403 : 401).json({ error: e?.message || "unauthorized" });
+    res
+      .status(e?.message?.startsWith("forbidden:") ? 403 : 401)
+      .json({ error: e?.message || "unauthorized" });
   }
 });
 
