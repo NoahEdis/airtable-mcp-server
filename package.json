@@ -6,12 +6,12 @@
     "start": "npx tsx server.ts"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^0.0.1",
+    "@modelcontextprotocol/sdk": "1.19.1",
     "express": "^4.18.2",
-    "zod": "^3.22.2",
-    "jose": "^5.2.0"
+    "zod": "^3.22.4",
+    "jose": "^4.14.4"
   },
   "devDependencies": {
-    "tsx": "^3.12.0"
+    "tsx": "^3.12.7"
   }
 }
